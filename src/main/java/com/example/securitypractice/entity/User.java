@@ -5,7 +5,9 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,9 +17,14 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true, nullable = false)
     public String login;
-    private String name;
-    private String password;
+    public String name;
+    public LocalDateTime birthDate;
+    //private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Override
     public String toString() {
@@ -25,7 +32,7 @@ public class User {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
+              //  ", password='" + password + '\'' +
                 '}';
     }
 }
