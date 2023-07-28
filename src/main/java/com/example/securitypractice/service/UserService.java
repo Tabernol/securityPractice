@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    public Optional<User> getById(Long id);
+    Optional<User> getById(Long id);
 
-    public List<User> getAll();
+    List<User> getAll();
 
-    public User save(User user);
+    User save(User user);
 
-    public User updateUser(User user);
+    User updateUser(User user);
+    void deleteUser(Long id);
+
+
 }

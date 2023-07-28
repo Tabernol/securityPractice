@@ -9,11 +9,12 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends AuditingEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,7 +33,7 @@ public class User {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", name='" + name + '\'' +
-              //  ", password='" + password + '\'' +
+                //  ", password='" + password + '\'' +
                 '}';
     }
 }

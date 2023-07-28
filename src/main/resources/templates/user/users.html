@@ -5,13 +5,37 @@
     <title>Use</title>
 </head>
 <body>
-<h2> some text</h2>
-<div th:each="user : ${usersDto}">
-    <h4 th:text = "${user.id}"></h4th:text></h4>
-    <h4 th:text = "${user.login}"></h4>
-    <h4 th:text = "${user.name}"></h4>
-    <br>
-</div>
+
+<table>
+    <thead>
+    <tr>
+        <th> id</th>
+        <th> login</th>
+        <th> name</th>
+        <th> birth date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--    <tr th:if="${books.empty}">-->
+    <!--        <td colspan="2"> No Books Available </td>-->
+    <!--    </tr>-->
+    <tr th:each="user : ${usersDto}">
+        <td><span th:text="${user.id}"> id </span></td>
+        <td><span th:text="${user.login}"> login </span></td>
+        <td><span th:text="${user.name}"> name </span></td>
+        <td><span th:text="${user.birthDate}"> birth date </span></td>
+        <td>
+            <form th:action="@{'/users/' + ${user.id}}">
+                <button type="submit">EDIT</button>
+            </form>
+        </td>
+        <td>
+            <form th:method="post" th:action="@{'/users_delete/' + ${user.id}}">
+                <button type="submit" >DELETE</button>
+            </form>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

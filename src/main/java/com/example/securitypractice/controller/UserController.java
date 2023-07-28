@@ -7,8 +7,11 @@ import com.example.securitypractice.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -30,28 +33,36 @@ public class UserController {
 
     @GetMapping("/users")
     public String getAll(Model model) {
-        for (User user : userService.getAll()) {
-            System.out.println(user);
-        }
         model.addAttribute("usersDto", userMapper.mapToDto(userService.getAll()));
         return "user/users";
     }
+    @GetMapping("/userEdit/{id}")
+    public String editUser(@PathVariable(name = "id") Long id, Model model){
+        model.addAttribute("user", userService.getById(id).orElseThrow());
+        return "user/userEdit";
+    }
 
     @PostMapping("/registration")
-    public String save(UserPostDto userPostDto) {
+    public String save(UserPostDto userPostDto, Model model) {
         User user = userMapper.mapToEntity(userPostDto);
-        userService.save(user);
+        User saveUser = userService.save(user);
+        model.addAttribute("user", saveUser);
         return "user/user";
     }
 
-    @PostMapping("/editUser")
-    public String editUser(@PathVariable(value = "id") Long id, UserPostDto userPostDto){
-        User user = userMapper.mapToEntity(userPostDto);
-        userService.save(user);
+    @PostMapping("/users/{id}")
+    public String editUser(@PathVariable(value = "id") Long id, UserPostDto userPostDto, Model model) {
+        User user = userService.getById(id).orElseThrow();
+        user.setName(userPostDto.getName());
+        User save = userService.save(user);
+        model.addAttribute("user", save);
         return "user/user";
-
     }
 
-
+    @PostMapping("/users_delete/{id}")
+    public String deleteUser(@PathVariable(value = "id") Long id) {
+        userService.deleteUser(id);
+        return "redirect:/users";
+    }
 
 }

@@ -6,18 +6,17 @@
 </head>
 <body>
 
-<form method="post" action="editUser">
-    <div class="form-outline mb-0">
-        <input type="text" id="form1" class="form-control form-control-lg" name="name" th:value = "${user.name}"/>
-        <label class="form-label" for="form1">Your Name</label>
-    </div>
+<div>
+    <h4 th:text="${user.name}"></h4>
+    <br>
+    <h4 th:text="${user.login}"></h4>
+    <br>
+    <h4 th:text="${user.birthDate}"></h4>
+    <br>
 
-    <div class="d-flex justify-content-center">
-        <button type="submit"
-                class="btn btn-secondary">Edit
-        </button>
-    </div>
+    <a th:href="@{'/userEdit/' + ${user.id}}"> edit </a>
+</div>
 
-</form>
+
 </body>
 </html>
