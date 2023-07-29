@@ -1,3 +1,6 @@
+--liquibase formatted sql
+
+--changeset max:1
 CREATE TABLE IF NOT EXISTS users
 (
     id BIGSERIAL PRIMARY KEY ,
