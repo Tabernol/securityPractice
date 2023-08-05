@@ -2,12 +2,12 @@ package com.example.securitypractice.dto;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 public class UserPostDto {
     private String name;
     private String login;
     private String password;
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
 }

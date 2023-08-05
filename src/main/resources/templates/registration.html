@@ -5,26 +5,28 @@
     <title>Registration</title>
 </head>
 <body>
-<form method="post" action="registration">
-    <div class="form-outline mb-0">
-        <input type="text" id="form1" class="form-control form-control-lg" name="name"/>
-        <label class="form-label" for="form1">Your Name</label>
+<form method="post" th:action="@{'/registration'}">
+    <div>
+        <label for="name">Your Name</label>
+        <input th:type="text" id="name" name="name" th:value="${user.name}"/>
+
     </div>
 
-    <div class="form-outline mb-0">
-        <input type="email" id="form3" class="form-control form-control-lg" name="login"/>
-        <label class="form-label" for="form3">Your Email</label>
+    <div>
+        <label for="login">Your Email</label>
+        <input type="email" id="login" name="login" th:value="${user.login}"/>
     </div>
 
-    <div class="form-outline mb-0">
-        <input type="password" id="pass" class="form-control form-control-lg" name="password"/>
-        <label class="form-label" for="pass">Password</label>
+
+    <div>
+        <label for="birthDate">Your birth date</label>
+        <input type="date" name="birthDate" id="birthDate" th:value="${user.birthDate}">
     </div>
 
-    <div class="form-outline mb-0">
-        <input type="password" id="form5" class="form-control form-control-lg" name="repeat_password"/>
-        <label class="form-label" for="form5">Repeat your password</label>
-    </div>
+<!--    <div class="form-outline mb-0">-->
+<!--        <input type="password" id="pass" class="form-control form-control-lg" name="password"/>-->
+<!--        <label class="form-label" for="pass">Password</label>-->
+<!--    </div>-->
 
     <div class="d-flex justify-content-center">
         <button type="submit"

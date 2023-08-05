@@ -8,6 +8,7 @@ import org.hibernate.envers.NotAudited;
 import org.hibernate.envers.RelationTargetAuditMode;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -26,7 +27,7 @@ public class User extends AuditingEntity<Long> {
     @Column(unique = true, nullable = false)
     public String login;
     public String name;
-    public LocalDateTime birthDate;
+    public LocalDate birthDate;
     //private String password;
 
     @Enumerated(EnumType.STRING)
@@ -36,13 +37,15 @@ public class User extends AuditingEntity<Long> {
     //@OneToMany
     //private List<Something>
 
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", name='" + name + '\'' +
-                //  ", password='" + password + '\'' +
+                ", birthDate=" + birthDate +
+                ", role=" + role +
                 '}';
     }
 }
