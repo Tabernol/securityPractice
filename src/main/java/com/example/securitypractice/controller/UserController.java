@@ -1,16 +1,18 @@
 package com.example.securitypractice.controller;
 
+import com.example.securitypractice.dto.PageResponse;
+import com.example.securitypractice.dto.UserFilter;
 import com.example.securitypractice.dto.UserPostDto;
-import com.example.securitypractice.entity.User;
+import com.example.securitypractice.database.entity.User;
 import com.example.securitypractice.mapper.UserMapper;
 import com.example.securitypractice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Optional;
 
 @Controller
 //@RequestMapping("/users")
@@ -33,8 +35,11 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String getAll(Model model) {
-        model.addAttribute("usersDto", userMapper.mapToDto(userService.getAll()));
+    public String getAll(Model model, UserFilter userFilter, Pageable pageable) {
+        Page<User> page = userService.findAll(userFilter, pageable);
+
+        model.addAttribute("usersDto", PageResponse.of(page));
+        model.addAttribute("filter", userFilter);
         return "user/users";
     }
 
@@ -74,7 +79,7 @@ public class UserController {
 
     @PostMapping("/delete/{id}")
     public String deleteUser(@PathVariable(value = "id") Long id) {
-        userService.deleteUser(id);
+        userService.delete(id);
         return "redirect:/users";
     }
 

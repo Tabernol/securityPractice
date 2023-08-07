@@ -1,4 +1,4 @@
-package com.example.securitypractice.entity;
+package com.example.securitypractice.database.entity;
 
 import java.io.Serializable;
 

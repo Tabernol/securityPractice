@@ -1,17 +1,14 @@
-package com.example.securitypractice.entity;
+package com.example.securitypractice.database.entity;
 
-import jakarta.persistence.*;
+
+
 import lombok.*;
-import org.hibernate.Hibernate;
 import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
 import org.hibernate.envers.RelationTargetAuditMode;
 
-import java.io.Serializable;
+
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
 
 @Data
 @Builder

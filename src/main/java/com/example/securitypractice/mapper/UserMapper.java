@@ -2,8 +2,8 @@ package com.example.securitypractice.mapper;
 
 import com.example.securitypractice.dto.UserGetDto;
 import com.example.securitypractice.dto.UserPostDto;
-import com.example.securitypractice.entity.Role;
-import com.example.securitypractice.entity.User;
+import com.example.securitypractice.database.entity.Role;
+import com.example.securitypractice.database.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
