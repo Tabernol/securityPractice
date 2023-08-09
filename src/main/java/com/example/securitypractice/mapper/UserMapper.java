@@ -15,7 +15,7 @@ public class UserMapper {
     public UserGetDto mapToDto(User user){
         UserGetDto userDto = new UserGetDto();
         userDto.setId(user.getId());
-        userDto.setLogin(user.login);
+        userDto.setLogin(user.getLogin());
         userDto.setName(user.getName());
         userDto.setRole(user.getRole().name());
         userDto.setBirthDate(user.getBirthDate());

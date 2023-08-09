@@ -1,5 +1,6 @@
 package com.example.securitypractice.controller;
 
+import com.example.securitypractice.database.entity.Role;
 import com.example.securitypractice.dto.PageResponse;
 import com.example.securitypractice.dto.UserFilter;
 import com.example.securitypractice.dto.UserPostDto;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -46,16 +49,21 @@ public class UserController {
     @GetMapping("/edit/{id}")
     public String editUser(@PathVariable(name = "id") Long id, Model model) {
         model.addAttribute("user", userService.getById(id).orElseThrow());
+        model.addAttribute("roles", Role.values());
         return "user/userEdit";
     }
 
     @PostMapping("/registration")
-    public String save(UserPostDto userPostDto, Model model, RedirectAttributes redirectAttributes) {
-//        redirectAttributes.addFlashAttribute("user", userPostDto);
-//        if (true) {
-//            return "redirect:/registration";
-//        }
-//        For validation
+    public String save(@ModelAttribute @Validated UserPostDto userPostDto,
+                       BindingResult bindingResult,
+                       Model model, RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("user", userPostDto);
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            return "redirect:/registration";
+        }
+
         User user = userMapper.mapToEntity(userPostDto);
         User saveUser = userService.save(user);
         log.info(user.toString());
@@ -67,10 +75,10 @@ public class UserController {
     public String editUser(@PathVariable(value = "id") Long id, UserPostDto userPostDto, Model model) {
         User user = userService.getById(id).orElseThrow();
 
-
-
+// Need mapper for update
         user.setName(userPostDto.getName());
         user.setBirthDate(userPostDto.getBirthDate());
+        user.setRole(userPostDto.getRole());
 
         User save = userService.save(user);
         model.addAttribute("user", save);

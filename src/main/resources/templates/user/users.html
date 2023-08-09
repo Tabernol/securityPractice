@@ -35,6 +35,7 @@
         <th> login</th>
         <th> name</th>
         <th> birth date</th>
+        <th> role</th>
     </tr>
     </thead>
     <tbody>
@@ -46,6 +47,7 @@
         <td><span th:text="${user.login}"> login </span></td>
         <td><span th:text="${user.name}"> name </span></td>
         <td><span th:text="${user.birthDate}"> birth date </span></td>
+        <td><span th:text="${user.role}"> role </span></td>
         <td>
             <form th:action="@{'/users/' + ${user.id}}">
                 <button type="submit">EDIT</button>

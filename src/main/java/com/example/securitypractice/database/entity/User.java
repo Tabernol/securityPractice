@@ -22,9 +22,11 @@ public class User extends AuditingEntity<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true, nullable = false)
-    public String login;
-    public String name;
-    public LocalDate birthDate;
+    private String login;
+
+    private String password;
+    private String name;
+    private LocalDate birthDate;
     //private String password;
 
     @Enumerated(EnumType.STRING)
@@ -33,16 +35,4 @@ public class User extends AuditingEntity<Long> {
     //@NotAudited
     //@OneToMany
     //private List<Something>
-
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", name='" + name + '\'' +
-                ", birthDate=" + birthDate +
-                ", role=" + role +
-                '}';
-    }
 }
