@@ -5,9 +5,19 @@
     <title>Login</title>
 </head>
 <body>
-<p> Login page</p>
+<div style="color: red" th:if="${param.error}">
+    Bad Credentials
+</div>
 
-
+<form action="/login" method="post">
+    <label for="login"> Login
+        <input name="username" type="text" placeholder="your login" id="login">
+    </label>
+    <label for="password"> Password
+        <input name="password" type="password" placeholder="your password" id="password">
+    </label>
+    <button type="submit"> Login</button>
 </form>
+
 </body>
 </html>

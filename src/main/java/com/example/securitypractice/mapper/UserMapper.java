@@ -4,13 +4,18 @@ import com.example.securitypractice.dto.UserGetDto;
 import com.example.securitypractice.dto.UserPostDto;
 import com.example.securitypractice.database.entity.Role;
 import com.example.securitypractice.database.entity.User;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class UserMapper {
+
+    private final PasswordEncoder passwordEncoder;
 
     public UserGetDto mapToDto(User user){
         UserGetDto userDto = new UserGetDto();
@@ -38,7 +43,7 @@ public class UserMapper {
         user.setName(userPostDto.getName());
         user.setRole(Role.USER);
         user.setBirthDate(userPostDto.getBirthDate());
-       // user.setPassword(userPostDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userPostDto.getRawPassword()));
         return user;
     }
 }

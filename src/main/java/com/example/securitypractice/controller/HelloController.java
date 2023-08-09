@@ -13,7 +13,7 @@ public class HelloController {
         return "header";
     }
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String home() {
         return "home";
     }
