@@ -6,6 +6,8 @@
 </head>
 <body>
 
+<div th:include="header"></div>
+
 <form action="/users">
     <label for="name"> Name
         <input name="name" type="text" id="name" th:value="${filter.name()}">

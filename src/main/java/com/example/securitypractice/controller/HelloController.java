@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 public class HelloController {
-    @GetMapping("/header")
-    public String header() {
-        return "header";
-    }
 
     @GetMapping("/")
     public String home() {
