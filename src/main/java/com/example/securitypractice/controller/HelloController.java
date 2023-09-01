@@ -24,4 +24,10 @@ public class HelloController {
     public String toLogin() {
         return "login";
     }
+
+//    @GetMapping("/logout")
+//    public String logout() {
+//        System.out.println("LOG=============");
+//        return "home";
+//    }
 }

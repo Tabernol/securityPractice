@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice(basePackages = "com.example.securitypractice")
 public class ControllerHandler {
 
-    @ExceptionHandler(Exception.class)
-    public String handleExceptions(Exception exception, HttpServletRequest request) {
-        log.error("Failed to return response", exception);
-        return "error";
-    }
+//    @ExceptionHandler(Exception.class)
+//    public String handleExceptions(Exception exception, HttpServletRequest request) {
+//        log.error("Failed to return response", exception);
+//        return "error";
+//    }
 }

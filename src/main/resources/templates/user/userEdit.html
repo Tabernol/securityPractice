@@ -5,6 +5,8 @@
     <title>edit</title>
 </head>
 <body>
+<!--<div th:insert="~{fragment :: username}"></div>-->
+<div th:insert="~{fragment :: header}"></div>
 <form th:method="POST" th:action="@{'/users/'+ ${user.id}}">
     <div>
         <input th:type="text" id="name"  name="name" th:value="${user.name}"/>

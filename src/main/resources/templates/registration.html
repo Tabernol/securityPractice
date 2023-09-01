@@ -5,6 +5,7 @@
     <title>Registration</title>
 </head>
 <body>
+<div th:insert="~{fragment :: header}"></div>
 <form method="post" th:action="@{'/registration'}">
     <div>
         <label for="name">Your Name</label>

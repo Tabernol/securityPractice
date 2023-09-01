@@ -20,4 +20,15 @@ spring:
     properties.hibernate:
         show_sql: true
         format_sql: true
-#        hbm2ddl.auto: validate
+      #        hbm2ddl.auto: validate
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 456910870245-2558jpa2glr33kpgl5tuv5taupiiqknu.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
+            scope: openid, email, profile
+

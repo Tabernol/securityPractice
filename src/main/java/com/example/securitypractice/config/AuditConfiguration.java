@@ -17,10 +17,10 @@ import java.util.Optional;
 @Configuration
 public class AuditConfiguration {
 
-    @Bean
-    public AuditorAware<String> auditorAware() {
-        return () -> Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
-                .map(authentication -> (UserDetails)authentication.getPrincipal())
-                .map(UserDetails::getUsername);
-    }
+//    @Bean
+//    public AuditorAware<String> auditorAware() {
+//        return () -> Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
+//                .map(authentication -> (UserDetails)authentication.getPrincipal())
+//                .map(UserDetails::getUsername);
+//    }
 }

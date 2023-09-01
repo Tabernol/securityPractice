@@ -1,6 +1,7 @@
 package com.example.securitypractice.service;
 
 import com.example.securitypractice.database.entity.QUser;
+import com.example.securitypractice.database.entity.Role;
 import com.example.securitypractice.database.querydsl.QPredicates;
 import com.example.securitypractice.database.repository.UserRepo;
 import com.example.securitypractice.database.entity.User;
@@ -10,15 +11,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
 
     public UserServiceImpl(UserRepo userRepo) {
@@ -56,6 +55,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public User save(OidcUser oidcUser) {
+        Map<String, Object> claims = oidcUser.getClaims();
+        User user = new User();
+        user.setName(claims.get("name").toString());
+        user.setLogin(claims.get("email").toString());
+        user.setRole(Role.USER);
+        return userRepo.save(user);
+    }
+
+    @Override
     public User update(User user) {
         return userRepo.saveAndFlush(user);
     }
@@ -63,6 +72,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void delete(Long id) {
         userRepo.deleteById(id);
+    }
+
+    @Override
+    public boolean ifExist(String login) {
+        return userRepo.findByLogin(login).isPresent();
+    }
+
+    @Override
+    public Optional<User> getByLogin(String login) {
+        return userRepo.findByLogin(login);
     }
 
     @Override
@@ -75,4 +94,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 .orElseThrow(()
                         -> new UsernameNotFoundException("Failed to retrive user: " + username));
     }
+
+
 }
