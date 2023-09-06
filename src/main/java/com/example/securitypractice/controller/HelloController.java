@@ -2,6 +2,7 @@ package com.example.securitypractice.controller;
 
 import com.example.securitypractice.dto.UserPostDto;
 import com.example.securitypractice.service.EmailService;
+import com.example.securitypractice.service.PasswordResetTokenService;
 import com.example.securitypractice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -10,12 +11,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.UUID;
+
 @Controller
 @RequiredArgsConstructor
 public class HelloController {
 
     private final EmailService emailService;
     private final UserService userService;
+    private final PasswordResetTokenService passwordResetTokenService;
 
     @GetMapping("/")
     public String home() {
@@ -45,6 +49,7 @@ public class HelloController {
 
         //if email exist
         if (userService.ifExist(email)) {
+            passwordResetTokenService.save(email);
             emailService.sendEmail(email, "testSubject", "testMessage");
         } else {
             throw new IllegalArgumentException("User with login " + email + " not found");
