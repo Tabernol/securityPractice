@@ -10,16 +10,16 @@ spring:
       username: postgres
       password: postgres
 
-        # for Docker
-#    url: jdbc:postgresql://localhost:5433/postgres
+      # for Docker
+    #    url: jdbc:postgresql://localhost:5433/postgres
     name: postgres
     password: postgres
 
 
   jpa:
     properties.hibernate:
-        show_sql: true
-        format_sql: true
+      show_sql: true
+      format_sql: true
       #        hbm2ddl.auto: validate
 
   security:
@@ -31,4 +31,16 @@ spring:
             client-secret: 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
             redirect-uri: http://localhost:8080/login/oauth2/code/google
             scope: openid, email, profile
+
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: maxfortest91@gmail.com
+    password: mfblvqqnvtwvbvit
+    properties:
+      mail.smtp:
+        auth: true
+        starttls.enable: true
+        ssl.trust: smtp.gmail.com
 

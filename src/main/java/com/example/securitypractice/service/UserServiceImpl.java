@@ -9,7 +9,6 @@ import com.example.securitypractice.dto.UserFilter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
@@ -60,6 +59,8 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setName(claims.get("name").toString());
         user.setLogin(claims.get("email").toString());
+        //TODO change set password
+        user.setPassword(claims.get("nonce").toString());
         user.setRole(Role.USER);
         return userRepo.save(user);
     }

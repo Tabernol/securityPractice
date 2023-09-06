@@ -5,7 +5,7 @@
     <title>Use</title>
 </head>
 <body>
-<!--<div th:insert="~{fragment :: username}"></div>-->
+<div th:insert="~{fragment :: username}"></div>
 <div th:insert="~{fragment :: header}"></div>
 
 <form action="/users">
@@ -23,11 +23,10 @@
             <input name="size" type="number" id="size" th:value="${usersDto.metadata.size}">
         </label>
     </div>
-   <button type="submit">
-       find
-   </button>
+    <button type="submit">
+        find
+    </button>
 </form>
-
 
 
 <table>
@@ -41,24 +40,28 @@
     </tr>
     </thead>
     <tbody>
-    <!--    <tr th:if="${books.empty}">-->
-    <!--        <td colspan="2"> No Books Available </td>-->
-    <!--    </tr>-->
+
     <tr th:each="user : ${usersDto.content}">
         <td><span th:text="${user.id}"> id </span></td>
         <td><span th:text="${user.login}"> login </span></td>
         <td><span th:text="${user.name}"> name </span></td>
         <td><span th:text="${user.birthDate}"> birth date </span></td>
-        <td><span th:text="${user.role}"> role </span></td>
+        <div th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">
+            <td><span th:text="${user.role}"> role </span></td>
+        </div>
         <td>
-            <form th:action="@{'/users/' + ${user.id}}">
-                <button type="submit">EDIT</button>
-            </form>
+            <div th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">
+                <form th:action="@{'/users/' + ${user.id}}">
+                    <button type="submit">INFO</button>
+                </form>
+            </div>
         </td>
         <td>
-            <form th:method="post" th:action="@{'/delete/' + ${user.id}}">
-                <button type="submit" >DELETE</button>
-            </form>
+            <div th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">
+                <form th:method="post" th:action="@{'/delete/' + ${user.id}}">
+                    <button type="submit">DELETE</button>
+                </form>
+            </div>
     </tr>
     </tbody>
 </table>

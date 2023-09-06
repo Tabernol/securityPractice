@@ -14,7 +14,6 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class UserMapper {
-
     private final PasswordEncoder passwordEncoder;
 
     public UserGetDto mapToDto(User user){

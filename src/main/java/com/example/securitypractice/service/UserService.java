@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public interface UserService extends UserDetailsService {
+public interface UserService extends  UserDetailsService {
     Optional<User> getById(Long id);
 
     List<User> findAll();

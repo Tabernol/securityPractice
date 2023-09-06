@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,6 +8,9 @@
 <div th:insert="~{fragment :: header}"></div>
 
 <div>This is home page content</div>
-<!--<div th:include="fragments/footer::foot"></div>-->
+<!--<div sec:authorize="hasRole('USER')">Text visible to user.</div>-->
+<!--<div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>-->
+<!--<div sec:authorize="isAuthenticated()">Text visible only to authenticated users.</div>-->
+
 </body>
 </html>
