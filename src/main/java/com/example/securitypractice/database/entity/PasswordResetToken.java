@@ -14,5 +14,5 @@ public class PasswordResetToken {
     private Long id;
     private String token;
     private Long userId;
-    private LocalDateTime expiry_date;
+    private LocalDateTime expiryDate;
 }

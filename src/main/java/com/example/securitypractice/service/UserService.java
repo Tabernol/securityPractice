@@ -31,5 +31,7 @@ public interface UserService extends  UserDetailsService {
 
     Optional<User> getByLogin(String login);
 
+    boolean changePassword(Long userId, String newPassword);
+
 
 }

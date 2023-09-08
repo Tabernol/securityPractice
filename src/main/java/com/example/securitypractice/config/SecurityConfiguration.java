@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 // .csrf().disable()
                 .authorizeHttpRequests(urlConfig -> urlConfig
-                        .antMatchers("/", "/login", "/registration", "/login/forgot").permitAll()
+                        .antMatchers("/", "/login", "/registration", "/login/**").permitAll()
                         .antMatchers("/admin/**").hasAuthority(Role.ADMIN.getAuthority())
                         .anyRequest().authenticated())
                 .logout(logout -> logout

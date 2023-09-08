@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -94,6 +95,11 @@ public class UserServiceImpl implements UserService {
                                 Collections.singleton(user.getRole())))
                 .orElseThrow(()
                         -> new UsernameNotFoundException("Failed to retrive user: " + username));
+    }
+
+    @Transactional
+    public boolean changePassword(Long userId, String newPassword) {
+        return userRepo.updatePassword(userId, newPassword) == 1;
     }
 
 

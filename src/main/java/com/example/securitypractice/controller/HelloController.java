@@ -1,25 +1,30 @@
 package com.example.securitypractice.controller;
 
+import com.example.securitypractice.database.entity.PasswordResetToken;
+import com.example.securitypractice.dto.ResetPasswordDto;
 import com.example.securitypractice.dto.UserPostDto;
 import com.example.securitypractice.service.EmailService;
 import com.example.securitypractice.service.PasswordResetTokenService;
 import com.example.securitypractice.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.UUID;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class HelloController {
 
     private final EmailService emailService;
     private final UserService userService;
     private final PasswordResetTokenService passwordResetTokenService;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public String home() {
@@ -38,7 +43,7 @@ public class HelloController {
     }
 
     @GetMapping("/login/forgot")
-    public String toRecoverPassword() {
+    public String recoverPassword() {
         return "forgot_password";
     }
 
@@ -46,20 +51,46 @@ public class HelloController {
     public String recoverPassword(@ModelAttribute("username") String email) {
         System.out.println("email for recover password " + email);
 
-
         //if email exist
         if (userService.ifExist(email)) {
-            passwordResetTokenService.save(email);
-            emailService.sendEmail(email, "testSubject", "testMessage");
+            PasswordResetToken save = passwordResetTokenService.save(email);
+
+            String resetUrl = "http://localhost:8080/login/reset-password?token=" + save.getToken();
+            emailService.sendEmail(email, "Reset Your Password",
+                    "To reset your password, click the link below:\n" + resetUrl);
         } else {
             throw new IllegalArgumentException("User with login " + email + " not found");
         }
 
 
         //letter with redirect to change password
+        return "home";
+    }
+
+    @GetMapping("/login/reset-password")
+    public String toResetPassword(@RequestParam("token") String token, Model model) {
+        model.addAttribute("token", token);
         return "reset_password";
     }
 
+    @PostMapping("/login/reset")
+    public String resetPassword(ResetPasswordDto resetPasswordDto) {
+        boolean ifTokenValid = passwordResetTokenService.ifTokenValid(resetPasswordDto.getToken());
+
+        boolean ifPasswordTheSame = passwordResetTokenService.ifPasswordAndRepeatPasswordTheSame(
+                resetPasswordDto.getPassword(), resetPasswordDto.getRepeatPassword());
+
+        if (ifPasswordTheSame || ifTokenValid) {
+            Long userId = passwordResetTokenService.getByToken(resetPasswordDto.getToken())
+                    .get().getUserId();
+            String newPassword = resetPasswordDto.getPassword();
+            userService.changePassword(userId, passwordEncoder.encode(newPassword));
+            log.info("password has changed");
+            return "/login";
+        }
+        log.info("something wrong with reset password");
+        return "/home";
+    }
 //    @GetMapping("/logout")
 //    public String logout() {
 //        System.out.println("LOG=============");
