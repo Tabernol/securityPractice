@@ -63,11 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             UserDetails userDetails = userService.loadUserByUsername(email);
 
             DefaultOidcUser oidcUser2 = new DefaultOidcUser(userDetails.getAuthorities(), userRequest.getIdToken());
-//            Map<String, Object> claims = oidcUser.getClaims();
-//
-//            for (Map.Entry<String, Object> entry : claims.entrySet()) {
-//                System.out.println(entry.getKey() + ":" + entry.getValue());
-//            }
+
             Set<Method> userDetailsMethods = Set.of(UserDetails.class.getMethods());
 
             return (OidcUser) Proxy.newProxyInstance(SecurityConfiguration.class.getClassLoader(),

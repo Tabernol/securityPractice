@@ -38,6 +38,14 @@ public class UserController {
         return "user/user";
     }
 
+    @GetMapping("/users/me/{login}")
+    public String getByLogin(@PathVariable("login") String login, Model model) {
+        log.info("login ==================== " + login);
+        User user = userService.getByLogin(login).orElseThrow();
+        model.addAttribute("user", user);
+        return "user/user";
+    }
+
     @GetMapping("/users")
     public String getAll(Model model, UserFilter userFilter, Pageable pageable) {
         Page<User> page = userService.findAll(userFilter, pageable);
