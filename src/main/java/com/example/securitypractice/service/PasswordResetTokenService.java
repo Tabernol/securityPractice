@@ -21,7 +21,8 @@ public class PasswordResetTokenService {
 
     public PasswordResetToken save(String email) {
         // throw an exception if the user is not found
-        Long userId = userRepo.findByLogin(email).orElseThrow().getId();
+        Long userId = userRepo.findByLogin(email).orElseThrow(()
+                -> new RuntimeException("User with email " + email + " not found")).getId();
         UUID uuid = UUID.randomUUID();
         LocalDateTime expireDate = LocalDateTime.now().plusSeconds(300L);
 

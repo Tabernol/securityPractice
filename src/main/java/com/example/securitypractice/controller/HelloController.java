@@ -78,18 +78,20 @@ public class HelloController {
         boolean ifTokenValid = passwordResetTokenService.ifTokenValid(resetPasswordDto.getToken());
 
         boolean ifPasswordTheSame = passwordResetTokenService.ifPasswordAndRepeatPasswordTheSame(
-                resetPasswordDto.getPassword(), resetPasswordDto.getRepeatPassword());
+                resetPasswordDto.getPassword(), resetPasswordDto.getRepeat());
 
-        if (ifPasswordTheSame || ifTokenValid) {
+        if(!ifPasswordTheSame){
+            throw new IllegalArgumentException("passwords are not the same");
+        } else if (!ifTokenValid) {
+            throw new RuntimeException("time is over for reset password, try again");
+        } else {
             Long userId = passwordResetTokenService.getByToken(resetPasswordDto.getToken())
                     .get().getUserId();
             String newPassword = resetPasswordDto.getPassword();
             userService.changePassword(userId, passwordEncoder.encode(newPassword));
             log.info("password has changed");
-            return "/login";
+            return "/home";
         }
-        log.info("something wrong with reset password");
-        return "/home";
     }
 //    @GetMapping("/logout")
 //    public String logout() {

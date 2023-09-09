@@ -6,5 +6,5 @@ import lombok.Data;
 public class ResetPasswordDto {
     private String token;
     private String password;
-    private String repeatPassword;
+    private String repeat;
 }
