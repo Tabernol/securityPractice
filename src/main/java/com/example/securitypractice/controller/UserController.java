@@ -11,6 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,10 +28,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
+    private final AuthenticationManager authenticationManager;
 
-    public UserController(UserService userService, UserMapper userMapper) {
+    public UserController(UserService userService, UserMapper userMapper, AuthenticationManager authenticationManager) {
         this.userService = userService;
         this.userMapper = userMapper;
+        this.authenticationManager = authenticationManager;
     }
 
 
@@ -77,7 +83,8 @@ public class UserController {
         User saveUser = userService.save(user);
         log.info(user.toString());
         model.addAttribute("user", saveUser);
-        return "user/user";
+        authenticateUser(userPostDto.getLogin(), userPostDto.getRawPassword());
+        return "redirect:/users";
     }
 
     @PostMapping("/users/{id}")
@@ -91,7 +98,7 @@ public class UserController {
 
         User save = userService.save(user);
         model.addAttribute("user", save);
-        return "user/user";
+        return "user/users";
     }
 
     @PostMapping("/delete/{id}")
@@ -99,6 +106,13 @@ public class UserController {
     public String deleteUser(@PathVariable(value = "id") Long id) {
         userService.delete(id);
         return "redirect:/users";
+    }
+
+    private void authenticateUser(String login, String password) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(login, password)
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
 }
