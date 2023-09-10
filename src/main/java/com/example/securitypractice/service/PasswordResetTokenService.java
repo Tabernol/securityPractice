@@ -30,8 +30,6 @@ public class PasswordResetTokenService {
         passwordResetToken.setUserId(userId);
         passwordResetToken.setExpiryDate(expireDate);
         passwordResetToken.setToken(uuid.toString());
-
-
         return passwordResetTokenRepo.save(passwordResetToken);
     }
 
