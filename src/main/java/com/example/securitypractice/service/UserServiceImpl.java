@@ -40,7 +40,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> findAll(UserFilter userFilter, Pageable pageable) {
-
         var predicate = QPredicates.builder()
                 .add(userFilter.name(), QUser.user.name::containsIgnoreCase)
                 .add(userFilter.login(), QUser.user.login::containsIgnoreCase)
@@ -67,6 +66,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User update(User user) {
         return userRepo.saveAndFlush(user);
     }
