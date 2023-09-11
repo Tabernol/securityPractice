@@ -34,12 +34,10 @@ public class PasswordResetTokenService {
     }
 
     public boolean ifTokenValid(String token) {
-        if (passwordResetTokenRepo.findByToken(token).isPresent()) {
-            return passwordResetTokenRepo
-                    .findByToken(token)
-                    .get()
-                    .getExpiryDate()
-                    .isAfter(LocalDateTime.now());
+        Optional<PasswordResetToken> tokenOptional = passwordResetTokenRepo.findByToken(token);
+
+        if (tokenOptional.isPresent()) {
+            return tokenOptional.get().getExpiryDate().isAfter(LocalDateTime.now());
         }
         return false;
     }

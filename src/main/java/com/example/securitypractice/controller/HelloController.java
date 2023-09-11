@@ -49,9 +49,6 @@ public class HelloController {
 
     @PostMapping("/login/forgot")
     public String recoverPassword(@ModelAttribute("username") String email) {
-        System.out.println("email for recover password " + email);
-
-        //if email exist
         if (userService.ifExist(email)) {
             PasswordResetToken save = passwordResetTokenService.save(email);
 
@@ -61,9 +58,6 @@ public class HelloController {
         } else {
             throw new IllegalArgumentException("User with login " + email + " not found");
         }
-
-
-        //letter with redirect to change password
         return "home";
     }
 
@@ -93,9 +87,4 @@ public class HelloController {
             return "/home";
         }
     }
-//    @GetMapping("/logout")
-//    public String logout() {
-//        System.out.println("LOG=============");
-//        return "home";
-//    }
 }
