@@ -1,19 +1,17 @@
 #spring.datasource.url=jdbc:mysql://localhost:3306/my_db
 #spring.datasource.name=Max
 #spring.datasource.password=Maxroot8
-#$ docker run --name some-postgres -e POSTGRES_PASSWORD=postgres -p 5433:5432 -d postgres
+
 
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
-    hikari:
-      username: postgres
-      password: postgres
-
-      # for Docker
-    #    url: jdbc:postgresql://localhost:5433/postgres
     name: postgres
     password: postgres
+
+      # for Docker
+    # url: jdbc:postgresql://localhost:5433/postgres
+
 
 
   jpa:

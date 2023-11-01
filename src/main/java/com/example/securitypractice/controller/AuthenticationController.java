@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-public class HelloController {
+public class AuthenticationController {
 
     private final EmailService emailService;
     private final UserService userService;
