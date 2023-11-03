@@ -1,4 +1,4 @@
-package com.example.securitypractice.controller;
+package com.example.securitypractice.http.controller;
 
 import com.example.securitypractice.database.entity.Role;
 import com.example.securitypractice.dto.PageResponse;
@@ -113,6 +113,8 @@ public class UserController {
                 new UsernamePasswordAuthenticationToken(login, password)
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        System.out.println("===================================");
+        log.info("Credentials = " + authentication.getCredentials().toString());
     }
 
 }

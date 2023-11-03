@@ -39,6 +39,7 @@ dependencies {
     implementation 'org.springframework.data:spring-data-envers'
     implementation 'org.liquibase:liquibase-core'
 /////////////////////////////////////////////////////////
+    implementation "org.springdoc:springdoc-openapi-ui:1.6.6"
 
     implementation 'com.querydsl:querydsl-jpa'
 

@@ -1,4 +1,4 @@
-package com.example.securitypractice.controller;
+package com.example.securitypractice.http.controller;
 
 import com.example.securitypractice.database.entity.PasswordResetToken;
 import com.example.securitypractice.dto.ResetPasswordDto;

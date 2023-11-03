@@ -44,16 +44,17 @@ public class UserServiceImpl implements UserService {
                 .add(userFilter.name(), QUser.user.name::containsIgnoreCase)
                 .add(userFilter.login(), QUser.user.login::containsIgnoreCase)
                 .build();
-
         return userRepo.findAll(predicate, pageable);
     }
 
     @Override
+    @Transactional
     public User save(User user) {
         return userRepo.save(user);
     }
 
     @Override
+    @Transactional
     public User save(OidcUser oidcUser) {
         Map<String, Object> claims = oidcUser.getClaims();
         User user = new User();
@@ -72,8 +73,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(Long id) {
-        userRepo.deleteById(id);
+    @Transactional
+    public boolean delete(Long id) {
+        return userRepo.findById(id)
+                .map(entity -> {
+                    userRepo.delete(entity);
+                    userRepo.flush();
+                    return true;
+                })
+                .orElse(false);
     }
 
     @Override
@@ -94,7 +102,7 @@ public class UserServiceImpl implements UserService {
                                 user.getPassword(),
                                 Collections.singleton(user.getRole())))
                 .orElseThrow(()
-                        -> new UsernameNotFoundException("Failed to retrive user: " + username));
+                        -> new UsernameNotFoundException("Failed to retrieve user: " + username));
     }
 
     @Transactional
