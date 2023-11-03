@@ -35,4 +35,7 @@ public class User extends AuditingEntity<Long> {
     //@NotAudited
     //@OneToMany
     //private List<Something>
+
+
+//    private List<Location> locationList
 }

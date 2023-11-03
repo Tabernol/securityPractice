@@ -54,6 +54,14 @@ public class UserController {
 
     @GetMapping("/users")
     public String getAll(Model model, UserFilter userFilter, Pageable pageable) {
+
+//        Recyclable paper = new Paper();
+//        Recyclable paper1 = new Paper(12.5);
+//        Recyclable paper2 = new Paper(78);
+//        log.info(paper.toString());
+//        log.info(paper1.toString());
+//        log.info(paper2.toString());
+
         Page<User> page = userService.findAll(userFilter, pageable);
 
         model.addAttribute("usersDto", PageResponse.of(page));
