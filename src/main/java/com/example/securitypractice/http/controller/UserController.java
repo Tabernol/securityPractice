@@ -106,7 +106,7 @@ public class UserController {
 
         User save = userService.save(user);
         model.addAttribute("user", save);
-        return "user/users";
+        return "user/user";
     }
 
     @PostMapping("/delete/{id}")
