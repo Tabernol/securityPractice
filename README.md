@@ -1,6 +1,8 @@
 # 1. Overview
 
-The primary goal of this project is to gain a deeper understanding of Spring Security OAuth2 and explore other related technologies. It serves as a learning ground for implementing secure authentication and authorization.
+The primary goal of this project is to gain a deeper understanding of Spring Security and OAuth2 
+and explore other related technologies. 
+It serves as a learning ground for implementing secure authentication and authorization.
 
 # 2. Features
 
