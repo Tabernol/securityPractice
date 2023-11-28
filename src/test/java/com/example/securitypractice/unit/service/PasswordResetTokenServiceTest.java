@@ -1,9 +1,9 @@
-package com.example.securitypractice.service;
+package com.example.securitypractice.unit.service;
 
 import com.example.securitypractice.database.entity.PasswordResetToken;
-import com.example.securitypractice.database.entity.User;
 import com.example.securitypractice.database.repository.PasswordResetTokenRepo;
 import com.example.securitypractice.database.repository.UserRepo;
+import com.example.securitypractice.service.PasswordResetTokenService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,10 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class PasswordResetTokenServiceTest {

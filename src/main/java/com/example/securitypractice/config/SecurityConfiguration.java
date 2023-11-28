@@ -19,7 +19,6 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.Map;
 import java.util.Set;
 
 @Configuration
@@ -34,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 // .csrf().disable()
                 .authorizeHttpRequests(urlConfig -> urlConfig
-                        .antMatchers("/", "/login", "/registration", "/login/**").permitAll()
+                        .antMatchers("/", "/login", "/registration", "/login/**", "/swagger-ui/**").permitAll()
                         .antMatchers("/admin/**").hasAuthority(Role.ADMIN.getAuthority())
                         .anyRequest().authenticated())
                 .logout(logout -> logout

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CreateApplication</title>
+</head>
+<body>
+<h2>Create your application here</h2>
+
+<form method="post" th:action="@{'/createApplication'}">
+    <!--    <div>-->
+    <!--        <label for="name">Your Name</label>-->
+    <!--        <input th:type="text" id="name" name="name" th:value="${user.name}"/>-->
+    <!--    </div>-->
+
+    <div>
+        <label for="login">Your Email</label>
+        <input type="email" id="login" name="login" th:value="${#authentication.principal.username}"/>
+    </div>
+
+    <div>
+        <select id="type" name="type">
+            <option th:each="type: ${types}" th:value="${type.name}" th:text="${type.name}"> type</option>
+        </select>
+    </div>
+    <div>
+        <label for="weight">Weight in kilogram</label>
+        <input type="number" max="99999" id="weight" name="weight"/>
+    </div>
+    <div>
+        <label for="volume">Volume in liter</label>
+        <input type="number" max="99999" id="volume" name="volume"/>
+    </div>
+
+
+    <div class="d-flex justify-content-center">
+        <button type="submit"
+                class="btn btn-secondary">Submit
+        </button>
+    </div>
+</form>
+
+</body>
+</html>

@@ -1,21 +1,17 @@
-package com.example.securitypractice.service;
+package com.example.securitypractice.unit.service;
 
 import com.example.securitypractice.database.entity.Role;
 import com.example.securitypractice.database.entity.User;
 import com.example.securitypractice.database.repository.UserRepo;
-import com.example.securitypractice.dto.UserFilter;
+import com.example.securitypractice.service.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 

@@ -2,10 +2,10 @@ package com.example.securitypractice.service;
 
 import com.example.securitypractice.database.entity.QUser;
 import com.example.securitypractice.database.entity.Role;
-import com.example.securitypractice.database.querydsl.QPredicates;
-import com.example.securitypractice.database.repository.UserRepo;
 import com.example.securitypractice.database.entity.User;
 import com.example.securitypractice.dto.UserFilter;
+import com.example.securitypractice.database.querydsl.QPredicates;
+import com.example.securitypractice.database.repository.UserRepo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;

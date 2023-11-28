@@ -1,12 +1,12 @@
 package com.example.securitypractice.http.controller;
 
-import com.example.securitypractice.database.entity.Role;
 import com.example.securitypractice.dto.PageResponse;
 import com.example.securitypractice.dto.UserFilter;
 import com.example.securitypractice.dto.UserPostDto;
-import com.example.securitypractice.database.entity.User;
 import com.example.securitypractice.mapper.UserMapper;
 import com.example.securitypractice.service.UserService;
+import com.example.securitypractice.database.entity.Role;
+import com.example.securitypractice.database.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -2,7 +2,6 @@ package com.example.securitypractice.dto;
 
 import com.example.securitypractice.database.entity.Role;
 import lombok.Data;
-import org.postgresql.util.LruCache;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;

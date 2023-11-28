@@ -1,9 +1,10 @@
-package com.example.securitypractice.mapper;
+package com.example.securitypractice.unit.mapper;
 
-import com.example.securitypractice.database.entity.Role;
-import com.example.securitypractice.database.entity.User;
 import com.example.securitypractice.dto.UserGetDto;
 import com.example.securitypractice.dto.UserPostDto;
+import com.example.securitypractice.database.entity.Role;
+import com.example.securitypractice.database.entity.User;
+import com.example.securitypractice.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

@@ -4,7 +4,6 @@ import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.Expressions;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;

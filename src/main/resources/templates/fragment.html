@@ -32,6 +32,9 @@
                     <li>
                         <div th:insert="~{fragment :: username}"></div>
                     </li>
+                    <li>
+                        <div th:insert="~{fragment :: toApplication}"></div>
+                    </li>
 
                     <!--                    <li class="nav-item" sec:authorize="isAuthenticated()">-->
                     <!--                        <form th:action="@{'/users/'}">-->
@@ -52,6 +55,22 @@
            th:href="@{/users/me/{login}(login=${#authentication.principal.username})}">
             <span th:text="${#authentication.principal.username}">Username</span>
         </a>
+    </div>
+</div>
+
+<div th:fragment="toApplication">
+    <div th:if="${#authorization.expression('isAuthenticated()')}">
+        <a class="nav-link active" aria-current="page"
+           th:href="@{/toCreateApplication}">
+            <span>Create Application</span>
+        </a>
+    </div>
+</div>
+
+<div th:fragment="location">
+    <div>
+        <label for="coordinates">Coordinates</label>
+        <input type="text" id="coordinates" name="coordinates"/>
     </div>
 </div>
 
